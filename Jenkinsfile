@@ -43,4 +43,10 @@ node {
         archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
     }
 
+    stage('Deliver') {
+        steps {
+             sh 'scp -v -o StrictHostKeyChecking=no  -i /var/lib/jenkins/.ssh/sts-ILab-20181012.pem target/*.jar ec2-user@ip-172-31-39-105.ec2.internal:/home/ec2-user/lib'
+        }
+    }
+
 }
