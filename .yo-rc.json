@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.simpletechnologysolutions",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.0.1",
+    "applicationType": "monolith",
+    "baseName": "devopsdemo",
+    "packageName": "com.simpletechnologysolutions",
+    "packageFolder": "com/simpletechnologysolutions",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Memory",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OTVhYWY4OTkyMGUxYTZmYWE4OWE4Y2RiMDAwZTFmZDJmNjM1NmIyNGQ0NmEwNzJiNDM5ZTkyNzA3NThiNTQyY2Q4NzM3NjUwZmM2ZGVkNTU3ZDU0ZGQyN2NiYmUwMGYyZWIxMDM3MGU0MzBlMWQzNTg0M2M1MzIyMDdmNjlhYjU=",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en"]
+  }
+}
