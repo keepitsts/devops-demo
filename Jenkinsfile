@@ -50,16 +50,7 @@ node {
     }
 
    stage ('Publish') {
-	nexusArtifactUploader artifacts: [
-	   [artifactId: 'nexus-artifact-uploader', classifier: 'debug', file: '/var/lib/jenkins/jobs/devops-demo-jhipster/lastSuccessful/archive/build/libs/devopsdemo-0.0.1-SNAPSHOT.jar', type: 'jar'], 
-	], 
-	credentialsId: '06d02dac-a365-47fc-ac92-c6a81bd86d3c', 
-	groupId: 'sp.sd', 
-	nexusUrl: 'localhost:8081/nexus', 
-	nexusVersion: 'nexus2', 
-	protocol: 'http', 
-	repository: 'NexusArtifactUploader', 
-	version: '2.4'
-}
+         nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [], mavenCoordinate: [artifactId: 'devopsdemo-0.0.1-SNAPSHOT.jar', groupId: 'org.jenkins-ci.main', packaging: 'jar', version: '1']]]
+   }
 
 }
