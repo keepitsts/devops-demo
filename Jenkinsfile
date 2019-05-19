@@ -51,8 +51,7 @@ node {
 
    stage ('Publish') {
 	nexusArtifactUploader artifacts: [
-	   [artifactId: 'nexus-artifact-uploader', classifier: 'debug', file: 'nexus-artifact-uploader.jar', type: 'jar'], 
-	   [artifactId: 'nexus-artifact-uploader', classifier: 'debug', file: 'nexus-artifact-uploader.hpi', type: 'hpi']
+	   [artifactId: 'nexus-artifact-uploader', classifier: 'debug', file: 'devopsdemo-0.0.1-SNAPSHOT.jar', type: 'jar'], 
 	], 
 	credentialsId: '06d02dac-a365-47fc-ac92-c6a81bd86d3c', 
 	groupId: 'sp.sd', 
