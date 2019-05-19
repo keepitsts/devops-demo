@@ -50,7 +50,7 @@ node {
     }
 
    stage ('Publish') {
-         nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [], mavenCoordinate: [artifactId: 'devopsdemo-0.0.1-SNAPSHOT.jar', groupId: 'org.jenkins-ci.main', packaging: 'jar', version: '1']]]
+      nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '**/build/libs/*.jar']], mavenCoordinate: [artifactId: 'devopsdemo-0.0.1-SNAPSHOT.jar', groupId: 'org.jenkins-ci.main', packaging: 'jar', version: '1']]]
    }
 
 }
