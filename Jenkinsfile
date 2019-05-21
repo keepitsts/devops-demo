@@ -53,6 +53,6 @@ node {
    stage ('Publish') {
      // nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/jobs/devops-demo-jhipster/lastSuccessful/archive/build/libs/devopsdemo-0.0.1-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'devopsdemo-0.0.1-SNAPSHOT.jar', groupId: 'com.simpletechnologysolutions.main', packaging: 'jar', version: '1.0.0']]]
 
-     nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/jobs/devops-demo-jhipster/lastSuccessful/archive/build/libs/devopsdemo-0.0.1-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: '1.0.0']]]
+     nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/jobs/devops-demo-jhipster/lastSuccessful/archive/build/libs/devopsdemo-0.0.1-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: '1.0.0-SNAPSHOT']]]
    }
 }
