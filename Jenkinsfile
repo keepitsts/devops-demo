@@ -50,10 +50,10 @@ node {
        sh 'ssh -o StrictHostKeyChecking=no  -i /var/lib/jenkins/.ssh/sts-ILab-20181012.pem ec2-user@ip-172-31-39-105.ec2.internal "/sbin/service jhipster start"'
     }
 
-/*
    stage ('Publish') {
-      nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/jobs/devops-demo-jhipster/lastSuccessful/archive/build/libs/devopsdemo-0.0.1-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'devopsdemo-0.0.1-SNAPSHOT.jar', groupId: 'com.simpletechnologysolutions.main', packaging: 'jar', version: '1']]]
+      nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/jobs/devops-demo-jhipster/lastSuccessful/archive/build/libs/devopsdemo-0.0.1-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'devopsdemo-0.0.1-SNAPSHOT.jar', groupId: 'com.simpletechnologysolutions.main', packaging: 'jar', version: '1']]]
    }
+/*
 */
 
 }
