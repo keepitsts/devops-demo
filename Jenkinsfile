@@ -51,7 +51,7 @@ node {
 //    }
 //
 
-   stage ('Publish')
+   stage ('Publish') {
      nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-1.0.0.jar']], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: '1.0.0']]]
    }
 }
