@@ -52,6 +52,15 @@ node {
 //
 
    stage ('Publish') {
-     nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-1.0.3.jar']], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: '1.0.3']]]
+	steps {
+        	script {
+                    def version = sh (
+                        script: "./gradlew properties -q | grep \"^app-version:\" | awk '{print \$2}'",
+                        returnStdout: true
+                    ).trim()
+                    sh "echo Building project in version: $version"
+		}
+                   nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: ${version} ]]]
+            }
    }
 }
