@@ -3,7 +3,7 @@
 node {
     script {
       def version = sh (
-               script: "./gradlew properties -q | grep \"^app-version:\" | awk '{print \$2}'",
+               script: "./gradlew properties -q | grep \"^version:\" | awk '{print \$2}'",
                         returnStdout: true
               ).trim()
               sh "echo Building project in version: $version"
