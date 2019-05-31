@@ -1,8 +1,6 @@
-
-
 node {
     script {
-      def version = sh (
+      version = sh (
                script: "./gradlew properties -q | grep \"^version:\" | awk '{print \$2}'",
                         returnStdout: true
               ).trim()
@@ -61,6 +59,6 @@ node {
 //
 
    stage ('Publish') {
-       nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-1.0.4.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "1.0.4" ]]]
+       nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
    }
 }
