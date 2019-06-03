@@ -25,23 +25,23 @@ node {
     }
 
 /***  SKIP TESTING FOR NOW  */
-//    stage('backend tests') {
-//        try {
-//            sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
-//        } catch(err) {
-//            throw err
-//        } finally {
-//            junit '**/build/**/TEST-*.xml' } } 
+    stage('backend tests') {
+        try {
+            sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
+        } catch(err) {
+            throw err
+        } finally {
+            junit '**/build/**/TEST-*.xml' } } 
 
-//    stage('frontend tests') { 
-//       try {
-//            sh "./gradlew npm_run_test -Pprod -PnodeInstall --no-daemon"
-//        } catch(err) {
-//            throw err
-//        } finally {
-//            junit '**/build/test-results/TESTS-*.xml'
-//        }
-//    }
+    stage('frontend tests') { 
+       try {
+            sh "./gradlew npm_run_test -Pprod -PnodeInstall --no-daemon"
+        } catch(err) {
+            throw err
+        } finally {
+            junit '**/build/test-results/TESTS-*.xml'
+        }
+    }
 
 /**/
     stage('packaging') {
