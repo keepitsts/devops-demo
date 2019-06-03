@@ -6,7 +6,7 @@ node {
     stage('check java') {
         sh "java -version"
     }
-    
+
     script {
       version = sh (
                script: "./gradlew properties -q | grep \"^version:\" | awk '{print \$2}'",
@@ -42,7 +42,7 @@ node {
         } finally {
             junit '**/build/test-results/TESTS-*.xml'
         }
-//    }
+    }
 
 /**/
     stage('packaging') {
