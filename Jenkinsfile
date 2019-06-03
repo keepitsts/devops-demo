@@ -1,4 +1,12 @@
 node {
+    stage('checkout') {
+        checkout scm
+    }
+
+    stage('check java') {
+        sh "java -version"
+    }
+    
     script {
       version = sh (
                script: "./gradlew properties -q | grep \"^version:\" | awk '{print \$2}'",
@@ -7,13 +15,6 @@ node {
               sh "echo Building project in version: $version"
     }
 
-    stage('checkout') {
-        checkout scm
-    }
-
-    stage('check java') {
-        sh "java -version"
-    }
 
     stage('clean') {
         sh "chmod +x gradlew"
@@ -41,7 +42,7 @@ node {
         } finally {
             junit '**/build/test-results/TESTS-*.xml'
         }
-    }
+//    }
 
 /**/
     stage('packaging') {
