@@ -30,13 +30,19 @@ node {
 //    git 'https://github.com/keepitsts/devops-demo.git'
 //  }
 
-  stage('SonarQube analysis') {
-    // requires SonarQube Scanner 2.8+
-    def scannerHome = tool 'SonarQube Scanner 3.3';
-    withSonarQubeEnv('sonarqube') {
-      sh "${scannerHome}/bin/sonar-scanner"
+//  stage('SonarQube analysis') {
+//    // requires SonarQube Scanner 2.8+
+//    def scannerHome = tool 'SonarQube Scanner 3.3';
+//    withSonarQubeEnv('sonarqube') {
+//      sh "${scannerHome}/bin/sonar-scanner"
+//    }
+//  }
+
+    stage('quality analysis') {
+        withSonarQubeEnv('sonarqube') {
+            sh "./gradlew sonarqube --no-daemon"
+        }
     }
-  }
 
 /***  SKIP TESTING FOR NOW  */
 /**
