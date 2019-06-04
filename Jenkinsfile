@@ -32,7 +32,7 @@ node {
 
   stage('SonarQube analysis') {
     // requires SonarQube Scanner 2.8+
-    def scannerHome = tool 'SonarQube Scanner 2.8';
+    def scannerHome = tool 'SonarQube Scanner 3.3';
     withSonarQubeEnv('sonarqube') {
       sh "${scannerHome}/bin/sonar-scanner"
     }
