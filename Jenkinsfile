@@ -26,15 +26,15 @@ node {
     }
 
 /*** SONARQUBE ****/
-  stage('SCM') {
-    git 'https://github.com/keepitsts/devops-demo.git'
-  }
+//  stage('SCM') {
+//    git 'https://github.com/keepitsts/devops-demo.git'
+//  }
 
   stage('SonarQube analysis') {
+    // requires SonarQube Scanner 2.8+
+    def scannerHome = tool 'SonarQube Scanner 2.8';
     withSonarQubeEnv('sonarqube') {
-      // requires SonarQube Scanner for Gradle 2.1+
-      // It's important to add --info because of SONARJNKNS-281
-      sh './gradlew --info sonarqube'
+      sh "${scannerHome}/bin/sonar-scanner"
     }
   }
 
