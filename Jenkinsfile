@@ -29,6 +29,7 @@ node {
   stage('SCM') {
     git 'https://github.com/keepitsts/devops-demo.git'
   }
+
   stage('SonarQube analysis') {
     withSonarQubeEnv('sonarqube {
       // requires SonarQube Scanner for Gradle 2.1+
@@ -38,7 +39,7 @@ node {
   }
 
 /***  SKIP TESTING FOR NOW  */
-/*
+/**
     stage('backend tests') {
         try {
             sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
@@ -57,7 +58,7 @@ node {
         } finally {
 */
 //            junit '**/build/test-results/TESTS-*.xml'
-/*
+/**
         }
     }
 */
