@@ -25,24 +25,42 @@ node {
         sh "./gradlew npm_install -Pprod -PnodeInstall --no-daemon"
     }
 
+/*** SONARQUBE ****/
+  stage('SCM') {
+    git 'https://github.com/keepitsts/devops-demo.git'
+  }
+  stage('SonarQube analysis') {
+    withSonarQubeEnv('sonarqube {
+      // requires SonarQube Scanner for Gradle 2.1+
+      // It's important to add --info because of SONARJNKNS-281
+      sh './gradlew --info sonarqube'
+    }
+  }
+
 /***  SKIP TESTING FOR NOW  */
+/*
     stage('backend tests') {
         try {
             sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
-            junit '**/build/**/TEST-*.xml' } } 
+*/
+//            junit '**/build/**/TEST-*.xml' } } 
 
+/*
     stage('frontend tests') { 
        try {
             sh "./gradlew npm_run_test -Pprod -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
-            junit '**/build/test-results/TESTS-*.xml'
+*/
+//            junit '**/build/test-results/TESTS-*.xml'
+/*
         }
     }
+*/
 
 /**/
     stage('packaging') {
