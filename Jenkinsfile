@@ -25,19 +25,6 @@ node {
         sh "./gradlew npm_install -Pprod -PnodeInstall --no-daemon"
     }
 
-/*** SONARQUBE ****/
-//  stage('SCM') {
-//    git 'https://github.com/keepitsts/devops-demo.git'
-//  }
-
-//  stage('SonarQube analysis') {
-//    // requires SonarQube Scanner 2.8+
-//    def scannerHome = tool 'SonarQube Scanner 3.3';
-//    withSonarQubeEnv('sonarqube') {
-//      sh "${scannerHome}/bin/sonar-scanner"
-//    }
-//  }
-
     stage('quality analysis') {
         withSonarQubeEnv('sonarqube') {
             sh "./gradlew sonarqube --no-daemon -PnodeInstall -Pprod"
@@ -46,27 +33,27 @@ node {
 
 /***  SKIP TESTING FOR NOW  */
 /**
+*/
     stage('backend tests') {
         try {
             sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
-*/
-//            junit '**/build/**/TEST-*.xml' } } 
+            junit '**/build/**/TEST-*.xml' } } 
 
 /*
+*/
     stage('frontend tests') { 
        try {
             sh "./gradlew npm_run_test -Pprod -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
-*/
-//            junit '**/build/test-results/TESTS-*.xml'
-/**
+            junit '**/build/test-results/TESTS-*.xml'
         }
     }
+/**
 */
 
 /**/
