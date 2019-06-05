@@ -57,7 +57,7 @@ describe('Component Tests', () => {
         // GIVEN
         const credentials = {
           username: 'admin',
-          password: 'admin',
+          password: 'adminX',
           rememberMe: true
         };
 
