@@ -33,9 +33,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://stsdb01.ctvnjc0tu5zn.us-east-1.rds.amazonaws.com:3306/stsdemo?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: admin
-    password: simpletech
+    url: jdbc:mysql://localhost:3306/devopsdemo?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false
