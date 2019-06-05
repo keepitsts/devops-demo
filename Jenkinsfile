@@ -40,7 +40,7 @@ node {
 
     stage('quality analysis') {
         withSonarQubeEnv('sonarqube') {
-            sh "./gradlew sonarqube --no-daemon"
+            sh "./gradlew sonarqube --no-daemon -PnodeInstall -Pprod"
         }
     }
 
