@@ -59,6 +59,9 @@ node {
 
 /**/
     stage('packaging') {
+    	when {
+             branch 'master'
+        }
         sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
         archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
     }
@@ -73,6 +76,9 @@ node {
 //
 
    stage ('Publish') {
+    	when {
+             branch 'master'
+        }
        nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
    }
 }
