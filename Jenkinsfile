@@ -59,11 +59,10 @@ node {
 
 /**/
     stage('packaging') {
-    	when {
-             branch 'master'
+        if (env.BRANCH_NAME ==~ /(master)/) {
+           sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
+           archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
         }
-        sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
-        archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
     }
 
 // Testing deliverying artifact to Nexus server
@@ -76,9 +75,8 @@ node {
 //
 
    stage ('Publish') {
-    	when {
-             branch 'master'
+        if (env.BRANCH_NAME ==~ /(master)/) {
+           nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
         }
-       nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
    }
 }
