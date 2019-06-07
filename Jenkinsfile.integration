@@ -27,12 +27,13 @@ node {
     stage('build') {
         sh "./gradlew npm_install -Pprod -PnodeInstall --no-daemon"
     }
-
+/**
     stage('quality analysis') {
         withSonarQubeEnv('sonarqube') {
             sh "./gradlew sonarqube --no-daemon -PnodeInstall -Pprod"
         }
     }
+*/
 
 /**
     stage('backend tests') {
@@ -55,13 +56,14 @@ node {
 //            junit '**/build/test-results/TESTS-*.xml'
 //        }
 //    }
-
+/**
     stage('User Approval') {
         // input message: 'User input required', ok: 'Release!', parameters: [choice(name: 'RELEASE_APPROVED', choices: 'Yes\nNo', description: 'Proceed with Deployment?')]
         input message: 'User input required', ok: 'Proceed With Deployment?'
         echo "env: ${env.RELEASE_APPROVED}"
         echo "params: ${params.RELEASE_APPROVED}"
 	}
+*/
 
     stage('packaging') {
     	sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
