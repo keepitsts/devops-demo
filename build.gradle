@@ -31,7 +31,7 @@ plugins {
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
 
-version = "1.0.1-SNAPSHOT"
+version = "1.0.1-20190607-1003"
 group = "com.simpletechnologysolutions"
 
 sourceCompatibility=1.8
