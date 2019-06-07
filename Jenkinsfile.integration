@@ -1,8 +1,5 @@
 node {
-    def workspace_def = env.WORKSPACE
 
-    // PRINT ENVIRONMENT TO JOB
-    echo "env.workspace directory is ${workspace_def}"
     echo "workspace directory is ${workspace}"
 
     stage('checkout') {
@@ -62,6 +59,6 @@ node {
 
 
    stage ('Publish') {
-           nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
+           nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${workspace}/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
    }
 }
