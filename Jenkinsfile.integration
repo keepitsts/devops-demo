@@ -56,11 +56,11 @@ node {
 //        }
 //    }
 
-		stage('User Approval') {
+    stage('User Approval') {
         input message: 'User input required', ok: 'Release!',
-            parameters: [choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')]
-        echo "env: ${env.RELEASE_SCOPE}"
-        echo "params: ${params.RELEASE_SCOPE}"
+            parameters: [choice(name: 'RELEASE_APPROVED', choices: 'Yes\nNo', description: 'Proceed with Deployment?')]
+        echo "env: ${env.RELEASE_APPROVED}"
+        echo "params: ${params.RELEASE_APPROVED}"
 	}
 
     stage('packaging') {
