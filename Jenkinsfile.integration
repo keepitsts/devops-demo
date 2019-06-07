@@ -57,8 +57,8 @@ node {
 //    }
 
     stage('User Approval') {
-        input message: 'User input required', ok: 'Release!',
-            parameters: [choice(name: 'RELEASE_APPROVED', choices: 'Yes\nNo', description: 'Proceed with Deployment?')]
+        // input message: 'User input required', ok: 'Release!', parameters: [choice(name: 'RELEASE_APPROVED', choices: 'Yes\nNo', description: 'Proceed with Deployment?')]
+        input message: 'User input required', ok: 'Proceed With Deployment?'
         echo "env: ${env.RELEASE_APPROVED}"
         echo "params: ${params.RELEASE_APPROVED}"
 	}
