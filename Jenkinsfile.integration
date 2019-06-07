@@ -24,7 +24,7 @@ node {
         sh "./gradlew clean --no-daemon"
     }
 
-    stage('npm install') {
+    stage('build') {
         sh "./gradlew npm_install -Pprod -PnodeInstall --no-daemon"
     }
 
@@ -56,7 +56,6 @@ node {
     	sh "./gradlew bootJar -x test -Pprod -PnodeInstall --no-daemon"
         archiveArtifacts artifacts: '**/build/libs/*.jar', fingerprint: true
     }
-
 
    stage ('Publish') {
            nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-snapshots', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${workspace}/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
