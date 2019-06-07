@@ -1,4 +1,6 @@
 node {
+    echo "workspace directory is ${workspace}"
+
     stage('checkout') {
         checkout scm
     }
@@ -15,21 +17,21 @@ node {
               sh "echo Building project in version: $version"
     }
 
-
     stage('clean') {
         sh "chmod +x gradlew"
         sh "./gradlew clean --no-daemon"
     }
 
-    stage('npm install') {
+    stage('build') {
         sh "./gradlew npm_install -Pprod -PnodeInstall --no-daemon"
     }
 
-    stage('quality analysis') {
-        withSonarQubeEnv('sonarqube') {
-            sh "./gradlew sonarqube --no-daemon -PnodeInstall -Pprod"
-        }
-    }
+// Do we want/need to run Code Analysis for release?
+//    stage('quality analysis') {
+//        withSonarQubeEnv('sonarqube') {
+//            sh "./gradlew sonarqube --no-daemon -PnodeInstall -Pprod"
+//        }
+//    }
 
 /***  SKIP TESTING FOR NOW  */
 /**
@@ -75,7 +77,7 @@ node {
 
    stage ('Publish') {
         if (env.BRANCH_NAME ==~ /(master)/) {
-           nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "/var/lib/jenkins/workspace/devops-demo-jhipster/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
+           nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${workspace}/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
         }
    }
 }
