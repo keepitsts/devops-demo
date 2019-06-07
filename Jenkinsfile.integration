@@ -1,4 +1,10 @@
 node {
+    def workspace_def = env.WORKSPACE
+
+    // PRINT ENVIRONMENT TO JOB
+    echo "env.workspace directory is ${workspace_def}"
+    echo "workspace directory is ${workspace}"
+
     stage('checkout') {
         checkout scm
     }
