@@ -27,35 +27,30 @@ node {
     stage('build') {
         sh "./gradlew npm_install -Pprod -PnodeInstall --no-daemon"
     }
-/**
     stage('quality analysis') {
         withSonarQubeEnv('sonarqube') {
             sh "./gradlew sonarqube --no-daemon -PnodeInstall -Pprod"
         }
     }
-*/
 
-/**
     stage('backend tests') {
         try {
             sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
-*/
-//            junit '**/build/**/TEST-*.xml' } } 
+            junit '**/build/**/TEST-*.xml' } } 
 
-/**
     stage('frontend tests') { 
        try {
             sh "./gradlew npm_run_test -Pprod -PnodeInstall --no-daemon"
         } catch(err) {
             throw err
         } finally {
-*/
-//            junit '**/build/test-results/TESTS-*.xml'
-//        }
-//    }
+
+            junit '**/build/test-results/TESTS-*.xml'
+        }
+    }
 /**
     stage('User Approval') {
         // input message: 'User input required', ok: 'Release!', parameters: [choice(name: 'RELEASE_APPROVED', choices: 'Yes\nNo', description: 'Proceed with Deployment?')]
