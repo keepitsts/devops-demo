@@ -1,6 +1,7 @@
 provider "aws" {
   profile = "${var.profile}"
   region = "${var.region}"
+  version = "2.14"
 }
 
 data "template_file" "init" {
