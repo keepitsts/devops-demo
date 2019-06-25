@@ -62,24 +62,27 @@ pipeline {
 
         stage('backend tests') {
             steps {
-                try {
-                    sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
-                } catch(err) {
-                    throw err
-                } finally {
-                    junit '**/build/**/TEST-*.xml' } 
+                script {
+                    try {
+                        sh "./gradlew test integrationTest -Pprod -PnodeInstall --no-daemon"
+                    } catch(err) {
+                        throw err
+                    } finally {
+                        junit '**/build/**/TEST-*.xml' } 
+                }
             } 
         }
             
 
         stage('frontend tests') {
             steps {
-                try {
-                    sh "./gradlew npm_run_test -Pprod -PnodeInstall --no-daemon"
-                } catch(err) {
-                    throw err
-                } finally {
-                    junit '**/build/test-results/TESTS-*.xml'
+                script {
+                    try {
+                        sh "./gradlew npm_run_test -Pprod -PnodeInstall --no-daemon"
+                    } catch(err) {
+                        throw err
+                    } finally {
+                        junit '**/build/test-results/TESTS-*.xml' }
                 }
             } 
         }
@@ -92,20 +95,26 @@ pipeline {
         }
 
         stage ('Publish') {
-            nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${workspace}/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
+            steps {
+                nexusPublisher nexusInstanceId: 'stsnexus', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: "${workspace}/build/libs/devopsdemo-${version}.jar"]], mavenCoordinate: [artifactId: 'devops-demo', groupId: 'com.simpletechnologysolutions', packaging: 'jar', version: "${version}" ]]]
+            }
         }
 
         stage('terraform init') {
+            steps {
                 dir('./terraform/prod'){
                     sh "echo 'Initializing Terraform'"
                     sh "terraform init -input=false"
                 }
             }
+        }
 
         stage('terraform plan'){
-            dir('./terraform/prod'){
-                sh "echo 'Planning Terraform Build'"
-                sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
+            steps {
+                dir('./terraform/prod'){
+                    sh "echo 'Planning Terraform Build'"
+                    sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
+                }
             }
         }
 
