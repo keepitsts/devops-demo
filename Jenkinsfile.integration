@@ -18,7 +18,6 @@ pipeline {
             steps {
                 checkout scm
                 echo "workspace directory is ${workspace}"
-                echo "${env.ACCESS_KEY}"
             }   
         }
 
@@ -114,7 +113,7 @@ pipeline {
             steps {
                 dir('./terraform/prod'){
                     sh "echo 'Planning Terraform Build'"
-                    sh "terraform plan -var 'access_key=${env.ACCESS_KEY}' -var 'secret_key=${env.SECRET_KEY}'"
+                    sh "terraform plan //-var 'access_key=${env.ACCESS_KEY}' -var 'secret_key=${env.SECRET_KEY}'"
                 }
             }
         }
