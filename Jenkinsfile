@@ -1,5 +1,8 @@
-node {
-    tools {"org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform-0.11.10"}
+pipeline {
+    agent any
+    tools {
+        "org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform-0.11.10"
+    }
 
     environment {
         TF_HOME = tool('terraform-0.11.10')
