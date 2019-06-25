@@ -103,6 +103,7 @@ pipeline {
         stage('terraform init') {
             steps {
                 dir('./terraform/prod'){
+                    sh "terraform --version"
                     sh "echo 'Initializing Terraform'"
                     sh "terraform init -input=false"
                 }
