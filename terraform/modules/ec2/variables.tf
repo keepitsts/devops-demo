@@ -12,7 +12,7 @@ variable "key" {
 }
 
 variable "security_groups" {
-  type = "list"
+  
 }
 variable "subnet_id" {
   

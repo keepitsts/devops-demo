@@ -25,7 +25,7 @@ module "ec2_server" {
     profile = "sts"
     instance_type = "t3.medium"
 
-    security_groups = ["${module.security_group.id}"]
+    security_groups = "${module.security_group.id}"
     subnet_id = "subnet-0a1f8963d08b10d8f"
 
     name = "dev_server"
