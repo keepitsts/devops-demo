@@ -1,0 +1,57 @@
+
+//This pipeline should be run to destroy terraform resources
+pipeline {
+    agent any 
+
+    tools {
+        "org.jenkinsci.plugins.terraform.TerraformInstallation" "terraform-0.11.10"
+    }
+
+    environment {
+        TF_HOME = tool('terraform-0.11.10')
+        TF_IN_AUTOMATION = "true"
+        PATH = "$TF_HOME:$PATH"
+        ACCESS_KEY = credentials('jenkins-aws-secret-key-id')
+        SECRET_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+
+    stages{
+          stage('checkout') {
+              steps {
+                  checkout scm
+                  echo "workspace directory is ${workspace}"
+              }   
+          }
+
+        stage('terraform init') {
+            steps {
+                dir('./terraform/prod'){
+                    sh "terraform --version"
+                    sh "echo 'Initializing Terraform'"
+                    sh "terraform init -input=false"
+                }
+            }
+        }
+
+         stage('terraform apply'){
+             steps {
+                 script{
+                     def apply = false
+                     try {
+                         input message: 'Can you please confirm the destroy', ok: 'Ready to Destroy the Infrastructure'
+                         apply = true
+                     } catch (err) {
+                         apply = false
+                             currentBuild.result = 'UNSTABLE'
+                     }
+                     if(apply){
+                         dir('./terraform/prod'){
+                             sh "echo 'Applying Terraform'"
+                             sh 'terraform destroy --auto-approve'
+                         }
+                     }
+                 }
+             }
+         }
+    }   
+}
