@@ -119,25 +119,25 @@ pipeline {
             }
         }
 
-        stage('terraform apply'){
-            steps {
-                script{
-                    def apply = false
-                    try {
-                        input message: 'Can you please confirm the apply', ok: 'Ready to Apply the Config'
-                        apply = true
-                    } catch (err) {
-                        apply = false
-                            currentBuild.result = 'UNSTABLE'
-                    }
-                    if(apply){
-                        dir('./terraform/prod'){
-                            sh "echo 'Applying Terraform'"
-                            sh 'terraform apply --auto-approve'
-                        }
-                    }
-                }
-            }
-        }
+        // stage('terraform apply'){
+        //     steps {
+        //         script{
+        //             def apply = false
+        //             try {
+        //                 input message: 'Can you please confirm the apply', ok: 'Ready to Apply the Config'
+        //                 apply = true
+        //             } catch (err) {
+        //                 apply = false
+        //                     currentBuild.result = 'UNSTABLE'
+        //             }
+        //             if(apply){
+        //                 dir('./terraform/prod'){
+        //                     sh "echo 'Applying Terraform'"
+        //                     sh 'terraform apply --auto-approve'
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     }   
 }
