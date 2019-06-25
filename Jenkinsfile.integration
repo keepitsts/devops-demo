@@ -12,11 +12,12 @@ pipeline {
         ACCESS_KEY = credentials('jenkins-aws-secret-key-id')
         SECRET_KEY = credentials('jenkins-aws-secret-access-key')
     }
+
     
-    echo "workspace directory is ${workspace}"
 
     stage('checkout') {
         checkout scm
+        echo "workspace directory is ${workspace}"
     }
 
     stage('check java') {
