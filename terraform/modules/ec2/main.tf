@@ -56,7 +56,7 @@ resource "aws_instance" "server" {
   vpc_security_group_ids = ["${var.security_groups}"]
   subnet_id = "${var.subnet_id}"
 
-  associate_public_ip_address = "True"
+  associate_public_ip_address = True
 
   # iam_instance_profile = "${var.role}"
 
