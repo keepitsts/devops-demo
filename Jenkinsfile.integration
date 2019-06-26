@@ -73,7 +73,6 @@ pipeline {
               } 
           }
             
-
           stage('frontend tests') {
               steps {
                   script {
@@ -109,6 +108,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('terraform plan'){
             steps {
