@@ -58,7 +58,7 @@ resource "aws_instance" "server" {
 
   associate_public_ip_address = true
 
-  # iam_instance_profile = "${var.role}"
+  iam_instance_profile = "${var.role}"
 
   lifecycle {
     # prevent rebuild if a newer ami is released

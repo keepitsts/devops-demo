@@ -17,9 +17,9 @@ variable "security_groups" {
 variable "subnet_id" {
   
 }
-# variable "role" {
-  
-# }
+variable "role" {
+  default = "s3_access_for_ec2"
+}
 
 variable "OSDiskSize" {
   default = "8"
