@@ -29,7 +29,7 @@ data "template_file" "init" {
   /bin/echo -e "chef_license \"accept\"" >> /etc/chef/client.rb
 
   /bin/echo 'log_location     STDOUT' >> /etc/chef/file.json
-  /bin/echo -e "{\"run_list\": [ \"role[release]\" ]}"
+  /bin/echo -e "{\\\"run_list\\\": [ \\\"role[release]\\\" ]}"
 
   sudo chef-client -j /etc/chef/file.json --environment _default
 
