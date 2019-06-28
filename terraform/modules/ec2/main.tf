@@ -28,7 +28,11 @@ data "template_file" "init" {
   /bin/echo -e "validation_key \"/etc/chef/simpletechnologysolutions-validator.pem\"" >> /etc/chef/client.rb
   /bin/echo -e "chef_license \"accept\"" >> /etc/chef/client.rb
 
-  sudo chef-client
+  /bin/echo 'log_location     STDOUT' >> /etc/chef/file.json
+  /bin/echo -e "{\"run_list\": [ \"role[release]\" ]}"
+
+  sudo chef-client -j /etc/chef/file.json --environment _default
+
   EOF
 }
 
