@@ -14,7 +14,7 @@ module "security_group" {
   sg_name = "dev_security_group"
   sg_description = "Allows access to demo resources"
 
-  vpc_id = "vpc-0e3945d5888632944"
+  vpc_id = "vpc-55cb052f"
 
   http_cidr = ["0.0.0.0/0"]
   ssh_cidr = ["0.0.0.0/0"]
@@ -30,5 +30,5 @@ module "ec2_server" {
 
     name = "dev_server"
 
-    key = "demo_pipeline"
+    key = "26jun2019"
 }
