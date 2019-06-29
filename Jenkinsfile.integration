@@ -21,6 +21,16 @@ pipeline {
               }   
           }
 
+          stage('terraform destroy') {
+            steps {
+                dir('./terraform/prod'){
+                    sh "terraform --version"
+                    sh "echo 'Destroying old Infrastructure'"
+                    sh "terraform destroy --auto-approve"
+                }
+            }
+          }
+          
           stage('check java') {
               steps {
                   sh "java -version"
