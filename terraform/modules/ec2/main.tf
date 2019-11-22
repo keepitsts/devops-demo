@@ -1,6 +1,7 @@
 provider "aws" {
   profile = "${var.profile}"
   region = "${var.region}"
+  version = "2.14"
 }
 
 data "template_file" "init" {
@@ -27,7 +28,11 @@ data "template_file" "init" {
   /bin/echo -e "validation_key \"/etc/chef/simpletechnologysolutions-validator.pem\"" >> /etc/chef/client.rb
   /bin/echo -e "chef_license \"accept\"" >> /etc/chef/client.rb
 
-  sudo chef-client
+  /bin/echo 'log_location     STDOUT' >> /etc/chef/file.json
+  /bin/echo -e "{\\\"run_list\\\": [ \\\"role[release]\\\" ]}"
+
+  sudo chef-client -j /etc/chef/file.json --environment _default
+
   EOF
 }
 
@@ -55,7 +60,9 @@ resource "aws_instance" "server" {
   vpc_security_group_ids = ["${var.security_groups}"]
   subnet_id = "${var.subnet_id}"
 
-  # iam_instance_profile = "${var.role}"
+  associate_public_ip_address = true
+
+  iam_instance_profile = "${var.role}"
 
   lifecycle {
     # prevent rebuild if a newer ami is released

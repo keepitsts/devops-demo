@@ -13,9 +13,4 @@ variable "sg_description" {
 variable "vpc_id" {
   
 }
-variable "http_cidr" {
-  type = "list"
-}
-variable "ssh_cidr" {
-  type = "list"
-}
+

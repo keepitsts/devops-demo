@@ -16,17 +16,16 @@ module "security_group" {
 
   vpc_id = "vpc-0e3945d5888632944"
 
-  http_cidr = ["0.0.0.0/0"]
-  ssh_cidr = ["0.0.0.0/0"]
+
 }
 module "ec2_server" {
     source = "../modules/ec2"
 
     profile = "sts"
-    instance_type = "t3.medium"
+    instance_type = "t2.micro"
 
-    security_groups = ["${module.security_group.id}"]
-    subnet_id = "subnet-0a1f8963d08b10d8f"
+    security_groups = "${module.security_group.id}"
+    subnet_id = "subnet-02ccc03ce0ce2a594"
 
     name = "dev_server"
 
